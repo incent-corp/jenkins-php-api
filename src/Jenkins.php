@@ -99,6 +99,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $ret = curl_exec($curl);
 
@@ -125,6 +127,9 @@ class Jenkins
     {
         $curl = curl_init($this->baseUrl . '/api/json');
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
         curl_exec($curl);
 
         if (curl_errno($curl)) {
@@ -154,6 +159,8 @@ class Jenkins
         $curl = curl_init($this->baseUrl . '/api/json');
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl($curl, sprintf('Error during getting list of jobs on %s', $this->baseUrl));
@@ -213,6 +220,8 @@ class Jenkins
             $curl = curl_init($url);
 
             curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             $ret = curl_exec($curl);
 
             $this->validateCurl(
@@ -250,6 +259,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, \CURLOPT_POSTFIELDS, http_build_query($parameters));
 
         $headers = array();
@@ -279,6 +290,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $response_info = curl_getinfo($curl);
@@ -311,6 +324,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, \CURLOPT_POST, 1);
 
         $headers = array();
@@ -336,6 +351,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl($curl, sprintf('Error during getting information for queue on %s', $this->baseUrl));
@@ -391,6 +408,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl(
@@ -424,6 +443,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl(
@@ -465,6 +486,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl(
@@ -547,6 +570,8 @@ class Jenkins
         $url  = sprintf('%s/createItem?name=%s', $this->baseUrl, $jobname);
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         curl_setopt($curl, \CURLOPT_POSTFIELDS, $xmlConfiguration);
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
@@ -581,6 +606,8 @@ class Jenkins
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
         curl_setopt($curl, \CURLOPT_POSTFIELDS, $configuration);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $headers = array('Content-Type: text/xml');
 
@@ -604,6 +631,8 @@ class Jenkins
         $url  = sprintf('%s/job/%s/config.xml', $this->baseUrl, $jobname);
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl($curl, sprintf('Error during getting configuration for job %s', $jobname));
@@ -624,6 +653,8 @@ class Jenkins
 
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $headers = array();
 
@@ -652,6 +683,8 @@ class Jenkins
 
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $headers = array();
 
@@ -680,6 +713,8 @@ class Jenkins
         $url  = sprintf('%s/computer/%s/toggleOffline', $this->baseUrl, $computerName);
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $headers = array();
 
@@ -704,6 +739,8 @@ class Jenkins
         $url  = sprintf('%s/computer/%s/doDelete', $this->baseUrl, $computerName);
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         $headers = array();
 
@@ -728,6 +765,8 @@ class Jenkins
         $url  = sprintf('%s/job/%s/%s/consoleText', $this->baseUrl, $jobname, $buildNumber);
         $curl = curl_init($url);
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 
         return curl_exec($curl);
     }
@@ -746,6 +785,8 @@ class Jenkins
         $curl = curl_init($url);
 
         curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $errorMessage = sprintf(
@@ -781,6 +822,8 @@ class Jenkins
         $url  = $this->baseUrl . '/' . $uri;
         $curl = curl_init($url);
         curl_setopt_array($curl, $curlOptions);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $ret = curl_exec($curl);
 
         $this->validateCurl($curl, sprintf('Error calling "%s"', $url));
