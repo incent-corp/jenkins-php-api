@@ -155,4 +155,17 @@ class Job
 
         return $this->getJenkins()->getBuild($this->getName(), $this->job->lastSuccessfulBuild->number);
     }
+    
+    /**
+     * @return Build|null
+     */
+    public function getLastBuild()
+    {
+        if (empty($this->job->build)) {
+            return null;
+        }
+
+        $build = $this->job->builds[0];
+        return $this->getJenkinsBuild($build->number);
+    }
 }
