@@ -161,7 +161,7 @@ class Job
      */
     public function getLastBuild()
     {
-        if (empty($this->job->build)) {
+        if (empty($this->job->builds)) {
             return null;
         }
 
