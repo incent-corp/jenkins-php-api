@@ -75,6 +75,7 @@ class Job
 
             foreach ($action->parameterDefinitions as $parameterDefinition) {
                 $default     = property_exists($parameterDefinition, 'defaultParameterValue')
+                               && isset($parameterDefinition->defaultParameterValue->value)
                     ? $parameterDefinition->defaultParameterValue->value
                     : null;
                 $description = property_exists($parameterDefinition, 'description')
@@ -155,17 +156,16 @@ class Job
 
         return $this->getJenkins()->getBuild($this->getName(), $this->job->lastSuccessfulBuild->number);
     }
-    
+
     /**
      * @return Build|null
      */
     public function getLastBuild()
     {
-        if (empty($this->job->builds)) {
+        if (null === $this->job->lastBuild) {
             return null;
         }
 
-        $build = $this->job->builds[0];
-        return $this->getJenkinsBuild($build->number);
+        return $this->getJenkins()->getBuild($this->getName(), $this->job->lastBuild->number);
     }
 }
