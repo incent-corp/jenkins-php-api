@@ -65,12 +65,18 @@ class Build
     {
         $parameters = array();
 
-        if (!property_exists($this->build->actions[0], 'parameters')) {
-            return $parameters;
-        }
+        foreach ($this->build->actions as $action) {
 
-        foreach ($this->build->actions[0]->parameters as $parameter) {
-            $parameters[$parameter->name] = $parameter->value;
+            if (property_exists($action, '_class')
+                && $action->_class === 'hudson.model.ParametersAction'
+                && property_exists($action, 'parameters')
+            ) {
+                foreach ($action->parameters as $parameter) {
+                    $parameters[$parameter->name] = $parameter->value;
+                }
+
+                return $parameters;
+            }
         }
 
         return $parameters;
