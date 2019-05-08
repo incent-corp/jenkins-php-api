@@ -310,6 +310,12 @@ class Jenkins
             throw new \RuntimeException('Error during json_decode');
         }
 
+        $jobName = parse_url($infos->url)['path'];
+        $jobName = preg_replace('/^\/job/', '', $jobName);
+        $jobName = trim($jobName, '/');
+
+        $infos->name = $jobName;
+
         return new Jenkins\Job($infos, $this);
     }
 
