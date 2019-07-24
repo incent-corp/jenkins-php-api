@@ -886,4 +886,41 @@ class Jenkins
             throw new \RuntimeException(sprintf('Access Denied [HTTP status code 403] to %s"', $info['url']));
         }
     }
+    
+    /**
+     * Get the currently building jobs
+     *
+     * @return Item\Job[]
+     */
+    public function getCurrentlyBuildingJobs($jobPrefix = null)
+    {
+        $url = sprintf(
+            '%s/job/%s/api/xml?%s',
+            $this->baseUrl,
+            $jobPrefix !== null ? '/' . trim($jobPrefix, '/') : "",
+            'tree=jobs[name,url,color]&xpath=//job[ends-with(color/text(),"_anime")]&wrapper=jobs'
+        );
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $ret = curl_exec($curl);
+        if (curl_errno($curl)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Error during getting all currently building jobs on %s (%s)', $this->baseUrl, curl_error($curl)
+                )
+            );
+        }
+
+
+        $xml = simplexml_load_string($ret);
+        $jobs = $xml->xpath('//job');
+
+        $buildingJobs = [];
+        foreach ($jobs as $job) {
+            $buildingJobs[] = $this->getJob($jobPrefix . '/job/' . $job->name);
+        }
+
+        return $buildingJobs;
+    }
 }
