@@ -53,6 +53,17 @@ class JobQueue
     {
         return $this->jobQueue->task->name;
     }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        $task = $this->jobQueue->task;
+        $start = strpos($task->url, 'job/') + 4;
+
+        return trim(substr($task->url, $start), '/');
+    }
 
     /**
      * @return int
